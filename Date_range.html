@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular Daterange</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href = "daterangepicker.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        #picker {
+            background: #fff; 
+            cursor: pointer; 
+            padding: 5px 10px; 
+            border: 1px solid #ccc; 
+            width: 100%
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5 mb-5" style="width: 400px;">
+        <div id="picker">
+            <i class="fa-fa-calendar"></i> &nbsp;
+            <span id="date"></span>
+            &nbsp; <i class="fa fa-caret-down"></i>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.css"></script>
+    <script src="moment.min.js"></script>
+    <script src="daterangepicker.js"></script>
+    <script>
+        $('#picker').daterangepicker({
+            startDate: moment().subtract(29, 'days'),
+            endDate: moment(),
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, function(start, end){
+            $('#date').html(start.format('MMMM DD, YYYY') + ' - ' + end.format('MMMM DD, YYYY'))
+        });
+        $('#date').html(moment().subtract(29, 'days').format('MMMM DD, YYYY') + ' - ' + moment().format('MMMM DD, YYYY'))
+        
+    </script>
+</body>
+</html>
